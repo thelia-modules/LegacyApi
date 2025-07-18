@@ -18,6 +18,8 @@ use LegacyApi\Event\Api\ApiUpdateEvent;
 use LegacyApi\Event\Events;
 use LegacyApi\Form\Api\ApiCreateForm;
 use LegacyApi\Form\Api\ApiUpdateForm;
+use LegacyApi\Form\ConfigurationForm;
+use LegacyApi\LegacyApi;
 use LegacyApi\Model\Api;
 use LegacyApi\Model\ApiQuery;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -197,5 +199,36 @@ class ApiController extends BaseAdminController
                 $api_id ? ['api_id' => $api_id] : null
             )
         );
+    }
+
+    public function configure()
+    {
+        if (
+            null !== $response = $this->checkAuth(
+                [AdminResources::MODULE],
+                [LegacyApi::DOMAIN_NAME],
+                AccessManager::UPDATE
+            )
+        ) {
+            return $response;
+        }
+
+        $form = $this->createForm(ConfigurationForm::getName());
+
+        try {
+            $vform = $this->validateForm($form);
+            $data = $vform->getData();
+
+            LegacyApi::setConfigValue('do_not_check_signature', (bool) $data['do_not_check_signature']);
+        } catch (\Exception $e) {
+            $this->setupFormErrorContext(
+                Translator::getInstance()->trans("Form error"),
+                $e->getMessage(),
+                $form,
+                $e
+            );
+        }
+
+        return $this->generateSuccessRedirect($form);
     }
 }

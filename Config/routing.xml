@@ -26,6 +26,10 @@
         <default key="_controller">LegacyApi\Controller\Admin\ApiController::processUpdateAction</default>
     </route>
 
+    <route id="admin.configuration.api" path="/admin/configuration/api/configure" methods="post">
+        <default key="_controller">LegacyApi\Controller\Admin\ApiController::configure</default>
+    </route>
+
     <!-- Routes API ================================================================= -->
 
     <route id="api.test" path="/api" methods="get">

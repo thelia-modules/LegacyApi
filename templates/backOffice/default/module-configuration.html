@@ -69,6 +69,22 @@
         </div>
 
         <div class="form-container">
+            <div class="col-md-12">
+                {form name="legacy_api_form_configurationform"}
+                <form method="post" action="{url path="/admin/configuration/api/configure"}">
+                    {form_hidden_fields}
+
+                    {render_form_field field="success_url" value={url path='/admin/module/LegacyApi'}}
+                    {render_form_field field="error_url" value={url path='/admin/module/LegacyApi'}}
+
+                    {render_form_field field='do_not_check_signature'}
+
+                    <button type="submit" value="save" class="btn btn-primary " title="{intl l='Save' d='legacyapi.bo.default'}">
+                        {intl l='Save' d='legacyapi.bo.default' }
+                    </button>
+                </form>
+                {/form}
+            </div>
         </div>
     </div>
 </div>

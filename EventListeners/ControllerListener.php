@@ -93,7 +93,9 @@ class ControllerListener implements EventSubscriberInterface
         Tlog::getInstance()->debug("Content: " . $request->getContent());
         Tlog::getInstance()->debug("Expected signature: " . $sign);
 
-        if (0 && $sign !== $request->query->get('sign')) {
+        if (! LegacyApi::getConfigValue('do_not_check_signature', false)
+            &&
+            $sign !== $request->query->get('sign')) {
             Tlog::getInstance()->error("Got wrong signature: " . $request->query->get('sign'));
 
             throw new PreconditionFailedHttpException('wrong body request signature');
