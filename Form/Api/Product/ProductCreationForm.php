@@ -1,0 +1,58 @@
+<?php
+/*************************************************************************************/
+/*      This file is part of the Thelia package.                                     */
+/*                                                                                   */
+/*      Copyright (c) OpenStudio                                                     */
+/*      email : dev@thelia.net                                                       */
+/*      web : http://www.thelia.net                                                  */
+/*                                                                                   */
+/*      For the full copyright and license information, please view the LICENSE.txt  */
+/*      file that was distributed with this source code.                             */
+/*************************************************************************************/
+
+namespace LegacyApi\Form\Api\Product;
+
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Thelia\Core\Translation\Translator;
+use Thelia\Form\ProductCreationForm as BaseProductCreationForm;
+use Thelia\Form\StandardDescriptionFieldsTrait;
+
+/**
+ * Class ProductCreateForm
+ * @package LegacyApi\Form\Api\Product
+ * @author manuel raynaud <manu@raynaud.io>
+ */
+class ProductCreationForm extends BaseProductCreationForm
+{
+    use StandardDescriptionFieldsTrait;
+
+    /**
+     * @inherited
+     */
+    protected function buildForm(): void
+    {
+        $translator = Translator::getInstance();
+        BaseProductCreationForm::buildForm();
+
+        $this
+            ->formBuilder
+            ->add("brand_id", IntegerType::class, [
+                'required'    => true,
+                'label'       => $translator->trans('Brand / Supplier'),
+                'label_attr'  => [
+                    'for' => 'mode',
+                    'help' => $translator->trans("Select the product brand, or supplier."),
+                ],
+            ]);
+
+        $this->addStandardDescFields(array('title', 'locale'));
+    }
+
+    /**
+     * @return string the name of you form. This name must be unique
+     */
+    public static function getName()
+    {
+        return 'thelia_api_product_create';
+    }
+}

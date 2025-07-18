@@ -1,0 +1,24 @@
+{$api_id = $smarty.get.api_id|default:0}
+
+{javascripts file='assets/js/bootstrap-select/bootstrap-select.js'}
+    <script src='{$asset_url}'></script>
+{/javascripts}
+<script>
+
+    $(document).ready(function(){
+        $(".js-delete-api").click(function(e){
+            $('#api_delete_id').val($(this).data('id'))
+        });
+
+        {if $api_id > 0}
+        // JS stuff for update form
+        {include
+        file      = "includes/generic-js-dialog.html"
+        dialog_id = "api_update_dialog"
+        form_name = "thelia_api_update"
+        }
+
+        $('#api_update_dialog').modal();
+        {/if}
+    });
+</script>

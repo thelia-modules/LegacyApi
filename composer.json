@@ -1,0 +1,12 @@
+{
+  "name": "thelia/legacy-api-module",
+  "description": "Legacy old-style Thelia API as a module for Thelia 2.5",
+  "license": "LGPL-3.0-or-later",
+  "type": "thelia-module",
+  "require": {
+    "thelia/installer": "~1.1"
+  },
+  "extra": {
+    "installer-name": "LegacyApi"
+  }
+}
