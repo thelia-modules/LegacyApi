@@ -4,10 +4,10 @@
         xsi:schemaLocation="http://thelia.net/schema/dic/module http://thelia.net/schema/dic/module/module-2_2.xsd">
     <fullnamespace>LegacyApi\LegacyApi</fullnamespace>
     <descriptive locale="en_US">
-        <title>Pre-2.5 API port</title>
+        <title>Pre-2.5 Thelia API port</title>
     </descriptive>
     <descriptive locale="fr_FR">
-        <title>API pre-2.5</title>
+        <title>Portage de l'API Thelia pre-2.5</title>
     </descriptive>
     <languages>
         <language>en_US</language>
@@ -24,7 +24,7 @@
     </authors>
     <type>classic</type>
     <thelia>2.5.0</thelia>
-    <stability>other</stability>
+    <stability>beta</stability>
     <mandatory>0</mandatory>
     <hidden>0</hidden>
 </module>
